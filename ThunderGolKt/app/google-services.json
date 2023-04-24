@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "229069328254",
+    "project_id": "thundergol-f339a",
+    "storage_bucket": "thundergol-f339a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229069328254:android:5ede4e23610502051dad2f",
+        "android_client_info": {
+          "package_name": "com.utamio.thundergol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229069328254-na11ei95se6kqd982kr3ugng93k8lnjg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.utamio.thundergol",
+            "certificate_hash": "0fe01565714fada80ec52ac40346ec2c786b1b5f"
+          }
+        },
+        {
+          "client_id": "229069328254-dsh9ql6j8ougbfichcdj47aiiinr0hun.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsTc1er_vY5bwSm1IT2ygIc0f8eDFpszw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "229069328254-dsh9ql6j8ougbfichcdj47aiiinr0hun.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
