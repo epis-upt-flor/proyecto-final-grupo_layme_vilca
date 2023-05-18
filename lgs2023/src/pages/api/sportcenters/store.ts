@@ -54,6 +54,8 @@ export default async function handler(req : NextApiRequest , res : NextApiRespon
         latitude : req.body.latitude,
         longitude : req.body.longitude,
         photo : publicUrlPhoto,
+        openingHour : req.body.openingHour,
+        closingHour : req.body.closingHour,
         adminId : administratorCenter.id
     }
     

@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-// import { prisma } from "prisma/db";
 import { collection , getDoc, getDocs } from 'firebase/firestore';
 import { firestore } from '@/firebase'
 export default async function handler(req : NextApiRequest,res : NextApiResponse){

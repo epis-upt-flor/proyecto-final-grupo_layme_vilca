@@ -10,18 +10,18 @@ export const backoffice : ISidebarItems[] = [
               { name : 'Lista' , path : '/system/backoffice/sportcenters'},
               { name : 'Materiales' , path : '/system/backoffice/materials'}
             ]
-          },
-    {
-      title : 'Reservas' ,
-      icon : <FiberManualRecord/>,
-      pages : [
-        { name : 'Lista' , path : '/system/reservations'},
-      ]
     },
-    { 
-      name : 'Canchas' ,
-      path : '/system/administrator/sportcourts',
-      icon : () => <Dashboard/>
-    },
+    // {
+    //   title : 'Reservas' ,
+    //   icon : <FiberManualRecord/>,
+    //   pages : [
+    //     { name : 'Lista' , path : '/system/reservations'},
+    //   ]
+    // },
+    // { 
+    //   name : 'Canchas' ,
+    //   path : '/system/administrator/sportcourts',
+    //   icon : () => <Dashboard/>
+    // },
 ]
 

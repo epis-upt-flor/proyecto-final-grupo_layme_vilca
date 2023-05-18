@@ -16,12 +16,14 @@ import DialogBasic from "@/components/DialogBasic";
 import { useStoreSportCourt } from "@/stores/sportcourt.store";
 import CreateSportCourt from "./create";
 import { Dashboard, Delete, DeleteForeverOutlined } from "@mui/icons-material";
+import { useSession } from "next-auth/react";
 
 export default function ListSportCourt(){
+    
     const { isOpenCreateSportCourt , toggleCreateSportCourt } = useStoreSportCourt()
     const {data : sportcourts , isLoading } = useQuery<SportCourt[]>({
-        queryKey : ['/api/sportcourts'],
-        queryFn : api.getSportCourts,
+        queryKey : ['/api/sportcourts/me'],
+        queryFn : api.getMySportCourts,
         initialData : []
     })
     
@@ -35,10 +37,6 @@ export default function ListSportCourt(){
         columnHelper.accessor(
             "name",
             { header : 'Canchas'}
-        ),
-        columnHelper.accessor(
-            "businessHours",
-            { header : 'Horario de atención'}
         ),
         columnHelper.accessor(() => null,{
             id : "SportCourts",

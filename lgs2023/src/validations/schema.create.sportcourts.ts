@@ -7,9 +7,7 @@ export const schemaCreateSportCourts = yup.object({
         return file?.size <= 2000000
     }),
     description : yup.string().required(),
-    price : yup.string().required(),
-    businessHours : yup.string().required(),
-    // businessHours : yup.array().required().min(1, 'Debe seleccionar al menos un dia'),
-
-  
+    price : yup.number().min(1).required(),
+    width : yup.number().min(1).required(),
+    long : yup.number().min(1).required(),
 })

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DtoCreateSportCenter, DtoEditSportCenter, SportCenter, SportCourt ,DtoCreateSportCourt } from "types";
+import { DtoCreateSportCenter, DtoEditSportCenter, SportCenter, SportCourt ,DtoCreateSportCourt, Material, ResponseReservation } from "types";
 
 export const axiosClient =  axios.create({
   baseURL: "http://localhost:3000/api"
@@ -30,10 +30,22 @@ export const api = {
         const response = await axiosClient.get('/sportcourts/list')
         return response.data
     },
+    getMySportCourts: async () : Promise<SportCourt[]> => {
+        const response = await axiosClient.get('/sportcourts/me')
+        return response.data
+    },
+    getMyReservations: async () : Promise<ResponseReservation[]> => {
+        const response = await axiosClient.get('/reservations/me')
+        return response.data
+    },
     storeSportCourt : async (data : DtoCreateSportCourt) : Promise<any> => {
         const form = new FormData()
         //@ts-ignore
         Object.keys(data).forEach((key:string) => form.append(key,data[key]))
         return await axiosClient.post('/sportcourts/store',form)
+    },
+    getMaterials: async () : Promise<Material[]> => {
+        const response = await axiosClient.get('/materials/list')
+        return response.data
     },
 }

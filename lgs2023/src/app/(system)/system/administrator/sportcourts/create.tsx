@@ -4,20 +4,25 @@ import InputDragAndDrop from "@/components/form/input.file.dad";
 import { useStoreSportCourt } from "@/stores/sportcourt.store";
 import { schemaCreateSportCourts } from "@/validations/schema.create.sportcourts";
 import { Button, Checkbox, FormControl, InputLabel, ListItemText, MenuItem, OutlinedInput, Stack, TextField } from "@mui/material";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { useFormik } from "formik";
 import { ChangeEvent, useState } from "react";
-import { DtoCreateSportCourt } from "types";
+import { DtoCreateSportCourt, Material } from "types";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 export default function CreateSportCourt(){
     
     const { toggleCreateSportCourt } = useStoreSportCourt()
+    const { data : materials , isLoading } = useQuery<Material[]>({
+        queryKey : ['/api/material/list'],
+        queryFn : api.getMaterials,
+        initialData : []
+    })
     const queryClient = useQueryClient()
     const mutation = useMutation(api.storeSportCourt,{
         onSuccess(data, variables, context) {
-            queryClient.invalidateQueries(['/api/sportcourts'])
+            queryClient.invalidateQueries(['/api/sportcourts/me'])
             setSubmitting(false)
             resetForm()
             toggleCreateSportCourt(false)
@@ -47,9 +52,10 @@ export default function CreateSportCourt(){
                 name: "",
                 photo : null,
                 description: "",
-                price: "",
-                businessHours: ""
-
+                price: 0,
+                width : 0,
+                long : 0,
+                materialId : ""
             },
             onSubmit(validated) {
                 mutation.mutate(validated)
@@ -57,37 +63,6 @@ export default function CreateSportCourt(){
             },
         })
 
-        // const days = [
-        //     'Lunes',
-        //     'Martes',
-        //     'Miercoles',
-        //     'Jueves',
-        //     'Viernes',
-        //     'Sabado',
-        //     'Domingo',
-        //   ];
-
-        // const ITEM_HEIGHT = 48;
-        // const ITEM_PADDING_TOP = 8;
-        // const MenuProps = {
-        //     PaperProps: {
-        //         style: {
-        //         maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-        //         width: 250,
-        //         },
-        //     },
-        // };
-        // const [dayName, setDayName] = useState<string[]>([]);
-
-        // interface MyEventTarget {
-        //     value: string | string[];
-        // }
-        // const handleChangeDay = (event: ChangeEvent<MyEventTarget>) => {
-        //     const { value } = event.target;
-        //     setDayName(
-        //       typeof value === 'string' ? value.split(',') : value,
-        //     );
-        //   }
         
     return (<>
     <Stack spacing={2} padding={4}>
@@ -125,39 +100,49 @@ export default function CreateSportCourt(){
             onChange={handleChange}
         />
         <TextField
-            name="businessHours"
+            name="width"
             size="small"
             fullWidth
             type="text"
-            label="Horario de atención"
-            defaultValue={sportcourt.businessHours}
-            error={touched.businessHours && Boolean(errors.businessHours)}
-            helperText={touched.businessHours && errors.businessHours}
+            label="Ancho (m.)"
+            defaultValue={sportcourt.width}
+            error={touched.width && Boolean(errors.width)}
+            helperText={touched.width && errors.width}
             onChange={handleChange}
         />
-         {/* <FormControl sx={{ m: 1}}  >
-            <InputLabel id="demo-multiple-checkbox-label">Dias de atención</InputLabel>
+        <TextField
+            name="long"
+            size="small"
+            fullWidth
+            type="text"
+            label="Largo (m.)"
+            defaultValue={sportcourt.long}
+            error={touched.long && Boolean(errors.long)}
+            helperText={touched.long && errors.long}
+            onChange={handleChange}
+        />
+
+         <FormControl sx={{ m: 1}}  >
+            <InputLabel id="materialId">Material</InputLabel>
             <Select
-                name="businessHours"
-                labelId="demo-multiple-checkbox-label"
-                id="demo-multiple-checkbox"
-                // size="small"
+                name="materialId"
+                labelId="materialId"
+                id="materialId"
+                size="small"
                 fullWidth
-                multiple
-                value={dayName}
-                onChange={handleChange}
-                input={<OutlinedInput label="Dias de atención" />}
-                renderValue={(selected) => selected.join(', ')}
-                MenuProps={MenuProps}
+                error={touched.materialId && Boolean(errors.materialId)}
+                value={{ id : sportcourt.materialId}}
+                onChange={(e) => {
+                    console.log({materialId : e.target.value})
+                    setFieldValue("materialId",e.target.value)
+                }}
+                input={<OutlinedInput label="Material" />}                
                 >
-                {days.map((day) => (
-                    <MenuItem key={day} value={day}>
-                    <Checkbox checked={dayName.indexOf(day) > -1} />
-                    <ListItemText primary={day} />
-                    </MenuItem>
+                {materials.map((material,index) => (
+                    <MenuItem key={index} value={material.id}>{material.name}</MenuItem>
                 ))}
             </Select>
-        </FormControl> */}
+        </FormControl>
         <InputDragAndDrop
         onChange={(file)=> {
             setFieldValue("photo",file)

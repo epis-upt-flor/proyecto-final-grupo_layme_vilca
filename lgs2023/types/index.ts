@@ -19,12 +19,13 @@ export type DtoCreateSportCenter = {
     fullName : string
     telephone : string
     email : string
-
     name : string
     photo : File | null
     latitude : string
     longitude : string
     address : string
+    openingHour : number
+    closingHour : number
 }
 export type DtoEditSportCenter = {
     id : string
@@ -39,9 +40,10 @@ export type DtoCreateSportCourt = {
     name : string
     photo : File | null
     description : string
-    price : string
-    businessHours : string
-    // businessHours : []
+    price : number
+    width : number
+    long : number
+    materialId : string
 }
 export type DtoEditSportCourt = {
     id : string
@@ -54,6 +56,18 @@ export type DtoEditSportCourt = {
 
 export type ISidebarItems = ISidebarPage | ISidebarGroup
 
+
+export type ResponseReservation = {
+    id : string
+    date : string
+    hourStart : string
+    hourEnd : string
+    sportCourtId : string
+    userId : string
+    total : number
+    sportCourtName : string
+    userName : string
+}
 
 // classes
 export type RoleEnum = "BackOffice" | "Administrator" | "Player"
@@ -74,6 +88,8 @@ export type SportCenter = {
     latitude : string
     longitude : string
     address : string
+    openingHour : number
+    closingHour : number
     adminId : string
 }
 
@@ -82,7 +98,26 @@ export type SportCourt = {
     name : string
     photo : string
     description : string
-    price : string
-    businessHours : string
+    price : number
+    width : number
+    long : number
     sportCenterId : string
+    materialId : string
+}
+
+
+export type Reservation = {
+    id : string
+    date : string
+    hourStart : string
+    hourEnd : string
+    sportCourtId : string
+    userId : string
+    total : number
+}
+
+
+export type Material = {
+    id : string
+    name : string 
 }

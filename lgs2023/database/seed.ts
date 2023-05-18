@@ -3,7 +3,7 @@ import { collection , doc, setDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore'
 import * as dotenv from 'dotenv'
-import { User } from "../types/index";
+import { Material, User } from "../types/index";
 import * as bcrypt from 'bcrypt'
 
 dotenv.config()
@@ -35,7 +35,39 @@ async function seed(){
     const refDocUser = doc(collectionUser);
     administratorBackOffice.id = refDocUser.id
     await setDoc(refDocUser,administratorBackOffice)
+
+
+    let materialCesped : Material = {
+        id : "",
+        name : "Cesped",
+        
+    }
+    const collectionMaterial = collection(database,"materials")
+    const refMaterial = doc(collectionMaterial);
+    materialCesped.id = refMaterial.id
+    await setDoc(refMaterial,materialCesped)
+
     
+    let materialLoza : Material = {
+        id : "",
+        name : "Loza",
+        
+    }
+    
+    const refMaterial1 = doc(collectionMaterial);
+    materialLoza.id = refMaterial1.id
+    await setDoc(refMaterial1,materialLoza)
+    
+    
+    let materialGrass : Material = {
+        id : "",
+        name : "Grass Sintetico",
+        
+    }
+    
+    const refMaterial2 = doc(collectionMaterial);
+    materialGrass.id = refMaterial2.id
+    await setDoc(refMaterial2,materialGrass)
 }
 
 seed()

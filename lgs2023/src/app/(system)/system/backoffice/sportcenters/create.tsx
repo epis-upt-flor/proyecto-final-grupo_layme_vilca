@@ -3,7 +3,7 @@ import { api } from "@/api";
 import InputDragAndDrop from "@/components/form/input.file.dad";
 import { useStoreSportCenter } from "@/stores/sportcenter.store";
 import { schemaCreateSportCenter } from "@/validations/schema.create.sportcenter";
-import { Button, Stack, TextField } from "@mui/material";
+import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { useFormik } from "formik";
@@ -51,13 +51,16 @@ export default function CreateSportCenter(){
                 latitude : "",
                 longitude : "",
                 photo : null,
+                openingHour : 0,
+                closingHour : 0
             },
             onSubmit(validated) {
-                
                 mutation.mutate(validated)
                 setSubmitting(true)
             },
         })
+
+    const hours = Array(24).fill(0).map((_,i) => i)
 
     return (<>
     <Stack spacing={2} padding={4}>
@@ -140,11 +143,54 @@ export default function CreateSportCenter(){
             helperText={touched.longitude && errors.longitude}
             onChange={handleChange}
         />
+
+        <FormControl fullWidth>
+            <InputLabel id="lblOpeningHour">Hora de apertura</InputLabel>
+            <Select
+                size="small"
+                labelId="lblOpeningHour"
+                name="openingHour"
+                value={sportcenter.openingHour}
+                label="Hora de apertura"
+                error={touched.openingHour && Boolean(errors.openingHour)}
+                onChange={handleChange}
+            >
+                {
+                    hours.map((hour) =>
+                        <MenuItem key={hour} value={hour}> {hour}h </MenuItem>
+                    )
+                }
+            </Select>
+        </FormControl>
+        
+        <FormControl fullWidth>
+            <InputLabel id="lblClosingHour">Hora de cierre</InputLabel>
+            <Select
+                size="small"
+                labelId="lblClosingHour"
+                name="closingHour"
+                value={sportcenter.closingHour}
+                label="Hora de cierre"
+                error={touched.closingHour && Boolean(errors.closingHour)}
+                onChange={handleChange}
+            >
+                {
+                    hours.map((hour) =>
+                        <MenuItem key={hour} value={hour}> {hour}h </MenuItem>
+                    )
+                }
+            </Select>
+        </FormControl>
+
+
         <InputDragAndDrop
-        onChange={(file)=> {
-            setFieldValue("photo",file)
-        }}
-    />                     
+            onChange={(file)=> {
+                setFieldValue("photo",file)
+            }}
+        />                     
+
+        
+
         <Button variant="contained" disabled={isSubmitting} onClick={() => {
             handleSubmit()
             console.log({errors})
