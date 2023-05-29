@@ -10,28 +10,28 @@ sealed  class BottomBarScreenSealed(
     val icon_focused: Int
 ) {
     object SportCourt: BottomBarScreenSealed(
-        route = ThunderGolE.MainRoute.name,
+        route = ThunderGolE.SPORT_COURT.route,
         title = "Canchas",
         icon = R.drawable.baseline_sports_soccer_24,
         icon_focused = R.drawable.baseline_sports_soccer_24
     )
 
     object Notification: BottomBarScreenSealed(
-        route = ThunderGolE.NotificationRoute.name,
+        route = ThunderGolE.NOTIFICATION.route,
         title = "Notificaciones",
         icon = R.drawable.baseline_notifications_none_24,
         icon_focused = R.drawable.baseline_notifications_none_24
     )
 
     object Reservation: BottomBarScreenSealed(
-        route = ThunderGolE.ReservationRoute.name,
+        route = ThunderGolE.RESERVATION.route,
         title = "Reservaciones",
         icon = R.drawable.baseline_list_alt_24,
         icon_focused = R.drawable.baseline_list_alt_24
     )
 
     object Profile: BottomBarScreenSealed(
-        route = ThunderGolE.ProfileRoute.name,
+        route = ThunderGolE.PROFILE.route,
         title = "Reservaciones",
         icon = R.drawable.baseline_person_4_24,
         icon_focused = R.drawable.baseline_person_4_24
