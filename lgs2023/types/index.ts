@@ -67,6 +67,33 @@ export type ResponseReservation = {
     total : number
     sportCourtName : string
     userName : string
+    payed : boolean
+    methodPayment : MethodPayment
+}
+
+export type ResponseReservationsBySportCourt = {
+    id : string
+    date : string
+    hourStart : string
+    hourEnd : string
+    sportCourtId : string
+    userId : string
+}
+
+export type DtoCreateReservation = {
+    date : string
+    hourStart : number
+    hourEnd : number
+    sportCourtId : string
+    userId : string
+    total : number
+    chargeCode : string
+    // methodPayment : string
+}
+
+export type DtoUpdateReservation = {
+    id : string
+    total : number
 }
 
 // classes
@@ -105,6 +132,7 @@ export type SportCourt = {
     materialId : string
 }
 
+export type MethodPayment = "Efectivo" | "Online"
 
 export type Reservation = {
     id : string
@@ -114,6 +142,8 @@ export type Reservation = {
     sportCourtId : string
     userId : string
     total : number
+    payed : boolean
+    methodPayment : MethodPayment
 }
 
 
