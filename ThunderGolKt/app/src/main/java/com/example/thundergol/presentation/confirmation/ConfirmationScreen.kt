@@ -18,6 +18,8 @@ import androidx.navigation.NavController
 import com.example.thundergol.ThunderGolE
 import com.example.thundergol.domain.model.ChargeModel
 import com.example.thundergol.domain.model.ReservationModel
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -95,7 +97,7 @@ fun ConfirmationScreen(
                Button(
                    onClick = {
                        scope.launch {
-
+                            Log.d("CCC",token)
                            val newCharge = ChargeModel(
                                amount = (newReservation.total * 100).toString(),
                                source_id = token,
@@ -103,13 +105,18 @@ fun ConfirmationScreen(
                                capture = false,
                            )
                             val charge = viewModel.storeCharge(newCharge)
-                           if (charge != null){
-                               newReservation.chargeCode = charge.id
+//                           if (charge != null){
+                               newReservation.chargeCode = charge!!.id
+//                              newReservation.chargeCode = ""
+                               newReservation.userId = Firebase.auth.currentUser!!.uid
+                               newReservation.payed = true
+                               newReservation.methodPayment = "Online"
                                viewModel.storeReservation(newReservation)
                                navController.navigate(ThunderGolE.SPORT_COURT.route)
-                           }else{
-                               Log.d("CH","No se pudo crear el cargo")
-                           }
+//                           }
+//                           else{
+//                               Log.d("CH","No se pudo crear el cargo")
+//                           }
                        }
                    }
                ) {

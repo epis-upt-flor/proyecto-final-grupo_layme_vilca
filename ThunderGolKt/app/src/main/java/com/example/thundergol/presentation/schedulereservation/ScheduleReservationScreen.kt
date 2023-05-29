@@ -52,8 +52,6 @@ fun ScheduleReservationScreen(
         }
     }
     val pagerState = rememberPagerState()
-    val _sportCourtDetail = MutableLiveData<SportCourtDetail>()
-//    val sportCourtDetail = _sportCourtDetail.observeAsState(initial = null)
 
 
     LaunchedEffect(key1 = Unit){

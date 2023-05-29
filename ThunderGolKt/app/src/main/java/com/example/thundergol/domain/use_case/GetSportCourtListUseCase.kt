@@ -23,7 +23,6 @@ class GetSportCourtListUseCase @Inject constructor(
 //        suspend operator fun invoke(): Flow<List<Deferred<SportCourtDetail>>> {
 suspend operator fun invoke(): Flow<List<SportCourtDetail>> {
     val res = repository.fetchListSportCourt().map { it.awaitAll() }
-//    res
          return res
     }
 }

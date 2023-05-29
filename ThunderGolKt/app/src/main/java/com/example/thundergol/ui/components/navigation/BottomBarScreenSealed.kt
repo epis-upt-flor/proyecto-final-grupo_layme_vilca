@@ -32,7 +32,7 @@ sealed  class BottomBarScreenSealed(
 
     object Profile: BottomBarScreenSealed(
         route = ThunderGolE.PROFILE.route,
-        title = "Reservaciones",
+        title = "Perfil",
         icon = R.drawable.baseline_person_4_24,
         icon_focused = R.drawable.baseline_person_4_24
     )

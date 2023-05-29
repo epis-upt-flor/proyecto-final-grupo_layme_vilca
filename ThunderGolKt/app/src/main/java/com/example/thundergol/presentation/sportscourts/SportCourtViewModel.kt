@@ -36,7 +36,6 @@ class SportCourtViewModel @Inject constructor(
     suspend fun fetchSportsCourts()  {
 
         viewModelScope.launch {
-//            sportsCourts.value = getSportCourtListUseCase.invoke()
             getSportCourtListUseCase.invoke().collect{
                 sportsCourts.value = it
             }
