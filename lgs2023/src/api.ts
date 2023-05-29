@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DtoCreateSportCenter, DtoEditSportCenter, SportCenter, SportCourt ,DtoCreateSportCourt, Material, ResponseReservation } from "types";
+import { DtoCreateSportCenter, DtoEditSportCenter, SportCenter, SportCourt ,DtoCreateSportCourt, Material, ResponseReservation, DtoCreateReservation, ResponseReservationsBySportCourt, DtoUpdateReservation } from "types";
 
 export const axiosClient =  axios.create({
   baseURL: "http://localhost:3000/api"
@@ -17,6 +17,9 @@ export const api = {
         Object.keys(data).forEach((key:string) => form.append(key,data[key]))
         return await axiosClient.post('/sportcenters/store',form)
     },
+    storeReservation : async (data : DtoCreateReservation) : Promise<any> => {
+        return await axiosClient.post('/reservations/store',data)
+    },
     getStoreCenterById : async (sportCenterId : string) : Promise<DtoEditSportCenter> => {
         return await axiosClient.post('/sportcenters/store',{sportCenterId})
     },
@@ -25,6 +28,9 @@ export const api = {
         //@ts-ignore
         Object.keys(data).forEach((key:string) => form.append(key,data[key]))
         return await axiosClient.post('/sportcenters/update',form)
+    },
+    updateReservationPayment : async(data :DtoUpdateReservation) : Promise<any> => {
+        return await axiosClient.post('/reservations/payment',data)
     },
     getSportCourts: async () : Promise<SportCourt[]> => {
         const response = await axiosClient.get('/sportcourts/list')
@@ -36,6 +42,10 @@ export const api = {
     },
     getMyReservations: async () : Promise<ResponseReservation[]> => {
         const response = await axiosClient.get('/reservations/me')
+        return response.data
+    },
+    getReservationsBySportCourtId: async (sportCourtId : string) : Promise<ResponseReservationsBySportCourt[]> => {
+        const response = await axiosClient.get(`/reservations/sportcourt/${sportCourtId}`)
         return response.data
     },
     storeSportCourt : async (data : DtoCreateSportCourt) : Promise<any> => {

@@ -42,7 +42,7 @@ export default async function handler(req : NextApiRequest , res : NextApiRespon
 
     const refDocAdmin = doc(collectionUser)
     administratorCenter.id = refDocAdmin.id
-    await setDoc(refDocAdmin,administratorCenter)
+    await setDoc(refDocAdmin,administratorCenter)//setDoc(ref,admin)
     
 
    
@@ -63,7 +63,7 @@ export default async function handler(req : NextApiRequest , res : NextApiRespon
     sportCenter.id = refDocSportCenter.id
     await setDoc(refDocSportCenter,sportCenter)
     
-    return res.json({})
+    return res.status(201).json({})
 }
 
 function getExtension(filename: string): string {
