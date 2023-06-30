@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DtoCreateSportCenter, DtoEditSportCenter, SportCenter, SportCourt ,DtoCreateSportCourt, Material, ResponseReservation, DtoCreateReservation, ResponseReservationsBySportCourt, DtoUpdateReservation } from "types";
+import { DtoCreateSportCenter, DtoEditSportCenter, SportCenter, SportCourt ,DtoCreateSportCourt, Material, ResponseReservation, DtoCreateReservation, ResponseReservationsBySportCourt, DtoUpdateReservation, NotificationResponse, DtoMarkAsReadNotification } from "types";
 
 export const axiosClient =  axios.create({
   baseURL: "http://localhost:3000/api"
@@ -32,12 +32,24 @@ export const api = {
     updateReservationPayment : async(data :DtoUpdateReservation) : Promise<any> => {
         return await axiosClient.post('/reservations/payment',data)
     },
+    notificationMarkAsRead : async( data : DtoMarkAsReadNotification ) : Promise<any> => {
+        return await axiosClient.post('/notifications/markasread',data)
+    },
+
     getSportCourts: async () : Promise<SportCourt[]> => {
         const response = await axiosClient.get('/sportcourts/list')
         return response.data
     },
     getMySportCourts: async () : Promise<SportCourt[]> => {
         const response = await axiosClient.get('/sportcourts/me')
+        return response.data
+    },
+    getMyNotificationsUnreaded: async () : Promise<NotificationResponse[]> => {
+        const response = await axiosClient.get('/notifications/unreaded/me')
+        return response.data
+    },
+    getMyNotificationsReaded: async () : Promise<NotificationResponse[]> => {
+        const response = await axiosClient.get('/notifications/readed/me')
         return response.data
     },
     getMyReservations: async () : Promise<ResponseReservation[]> => {

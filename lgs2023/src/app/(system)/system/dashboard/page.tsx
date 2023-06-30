@@ -1,3 +1,5 @@
 export default function DashboardPage(){
-    return <h1>Bienvenido a SOYTHUNDERGOL</h1>
+    return <>
+        <img src="/felino.png" />
+    </>
 }

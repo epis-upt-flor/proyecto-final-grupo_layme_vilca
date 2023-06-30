@@ -7,7 +7,7 @@ import { SportCourt } from "types";
 
 export default function ChooseSportCourt(){
 
-    const { setSportCourtId } = useStoreReservation()
+    const { setSportCourtId , newReservation  } = useStoreReservation()
     const {data : sportcourts , isLoading } = useQuery<SportCourt[]>({
         queryKey : ['/api/sportcourts/me'],
         queryFn : api.getMySportCourts,
@@ -15,18 +15,21 @@ export default function ChooseSportCourt(){
     })
 
     return (<>
-        <Grid container>
+        <Stack gap={2}>
             {
                 sportcourts.map( sp => (<Grid key={sp.id} item xs={6}>
-                    <Card onClick={() => setSportCourtId(sp.id , sp.price * 1 , sp.name )}>
+                    <Card raised={true} sx={{ backgroundColor : (t) => newReservation.sportCourtId == sp.id ? "rgba(25, 118, 210,0.2)" : "white"  }}  onClick={() => setSportCourtId(sp.id , sp.price * 1 , sp.name )}>
                         <CardContent>
                             <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                                 {sp.name}
+                            </Typography>
+                            <Typography variant="h6" color="text.secondary" gutterBottom>
+                                S/. {sp.price}
                             </Typography>
                         </CardContent>
                     </Card>
                 </Grid>))
             }
-        </Grid>    
+        </Stack>    
     </>)
 }

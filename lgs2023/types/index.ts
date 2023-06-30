@@ -1,5 +1,6 @@
 import { SvgIconTypeMap } from "@mui/material"
 import { OverridableComponent } from "@mui/material/OverridableComponent"
+import { Timestamp } from "firebase/firestore"
 import { Component } from "react"
 
 export type ISidebarGroup = {
@@ -150,4 +151,28 @@ export type Reservation = {
 export type Material = {
     id : string
     name : string 
+}
+
+export type Notification = {
+    id : string
+    sportCourtId : string
+    fromUserId : string
+    toUserId : string
+    message : string
+    read : boolean
+    createdAt : Timestamp
+}
+
+export type NotificationResponse = {
+    id : string
+    sportCourtName : string
+    fromUserId : string
+    toUserId : string
+    message : string
+    read : boolean
+    createdAtHumanReadable : string
+}
+export type DtoMarkAsReadNotification = {
+    id : string
+    read : boolean
 }
