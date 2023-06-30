@@ -7,5 +7,7 @@ interface ReservationRepositoryInterface {
     suspend fun storeReservation( reservation: ReservationModel)
 
     suspend fun fetchReservationsBySportCourtId(sportCourtId : String) : List<ReservationModel>
+
+    suspend fun fetchReservationsByUserId(userId : String) : List<ReservationModel>
     fun getCollection() : CollectionReference
 }

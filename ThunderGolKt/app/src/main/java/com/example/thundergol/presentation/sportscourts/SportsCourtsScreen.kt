@@ -48,7 +48,6 @@ fun SportsCourtsScreen(
 
     LaunchedEffect(key1 = Unit){
         viewModel.fetchSportsCourts()
-//        Log.d("SCREN",response.size.toString())
     }
 
     Column(modifier = Modifier

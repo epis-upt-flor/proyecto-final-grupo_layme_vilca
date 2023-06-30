@@ -26,6 +26,14 @@ class ReservationRepositoryImplementation(
         }
     }
 
+    override suspend fun fetchReservationsByUserId(userId : String): List<ReservationModel> {
+        val result : QuerySnapshot  = database.collection("reservations").whereEqualTo("userId",userId).get().await()
+        return if(result.isEmpty){
+            emptyList()
+        }else{
+            result.map { documentSnapshot -> documentSnapshot.toObject(ReservationModel::class.java) }
+        }
+    }
 
 
     override fun getCollection(): CollectionReference {
